@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.sist.mapper.emp-mapper">
+   <select id="empGetNameData" resultType="String">
+     SELECT ename FROM emp 
+   </select>
+   <select id="empInfoData" resultType="EmpVO" parameterType="hashmap">
+     SELECT empno,ename,job,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,sal,comm,
+            deptno
+     FROM emp 
+     <!-- 
+          prefix= 앞 첨부
+          suffix= 뒤 첨부
+          prefixOverrides= 앞 제거
+          suffixOverrides= 뒤 제거
+          
+          <if test="name!=null">
+            name LIKE '%%'
+          </if>
+          <if test="subject!=null">
+           OR subject LIKE '%%'
+          </if>
+          <if test="content!=null">
+           OR content LIKE '%%'
+          </if>
+      -->
+     <trim prefix="WHERE ename IN(" suffix=")" suffixOverrides=")" prefixOverrides="(">
+       <foreach collection="names" item="name" open="(" close=")" separator=",">
+         #{name}
+       </foreach>
+     </trim>
+   </select>
+ </mapper>
