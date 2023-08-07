@@ -20,13 +20,13 @@
             <table class="table">
               <tr>
                 <td width=30% class="text-center" rowspan=4>
-                  <a href="../food/food_detail.do?fno=${vo.fno }">
+                  <a href="../food/food_before_detail.do?fno=${vo.fno }">
                    <img src="${vo.poster }" style="width:290px;height:120px" class="img-rounded">
                   </a>
                 </td>
                 <td width=70%>
-                  <a href="../food/food_detail.do?fno=${vo.fno }">
-                  <h3>${vo.name }</a>&nbsp;<span style="color:oranger">${vo.score }</span></h3>
+                  <a href="../food/food_before_detail.do?fno=${vo.fno }">
+                  <h3>${vo.name }</a>&nbsp;<span style="color:orange">${vo.score }</span></h3>
                 </td>
               </tr>
               <tr>

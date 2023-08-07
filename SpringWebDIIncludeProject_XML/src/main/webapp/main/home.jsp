@@ -11,8 +11,8 @@
   <div class="row">
     <div class="text-center">
       <a href="../main/main.do" class="btn btn-sm btn-danger">믿고 보는 맛집 리스트</a>
-      <a href="../main/main.do?cno=2" class="btn btn-sm btn-success">믿고 보는 맛집 리스트</a>
-      <a href="../main/main.do?cno=3" class="btn btn-sm btn-warning">믿고 보는 맛집 리스트</a>
+      <a href="../main/main.do?cno=2" class="btn btn-sm btn-success">지역별 맛집 리스트</a>
+      <a href="../main/main.do?cno=3" class="btn btn-sm btn-warning">메뉴별 맛집 리스트</a>
     </div>
   </div>
   <div style="height:20px"></div>
@@ -29,6 +29,20 @@
 	      </div>
 	    </div>
 	  </c:forEach>
+  </div>
+  <div style="height:10px"></div>
+  <h3>최신 방문 맛집</h3>
+  <hr>
+  <div class="row">
+    <c:forEach var="cvo" items="${cList }">
+      <div class="col-md-2">
+	      <div class="thumbnail">
+	        <a href="#" target="_blank">
+	          <img src="${cvo.poster }" alt="Lights" style="width:100%">
+	        </a>
+	      </div>
+	    </div>
+    </c:forEach>
   </div>
 </body>
 </html>
