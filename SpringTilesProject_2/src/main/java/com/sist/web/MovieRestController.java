@@ -13,7 +13,7 @@ public class MovieRestController {
 			"https://www.kobis.or.kr/kobis/business/main/searchMainRealTicket.do",
 			"https://www.kobis.or.kr/kobis/business/main/searchMainDailySeatTicket.do"};
 	
-	@GetMapping(value = "movie/movie_rank_vue_do", produces = "test/plain;charset=UTF-8")
+	@GetMapping(value = "movie/movie_rank_vue_do", produces = "text/plain;charset=UTF-8")
 	/*
 	 	1. HTML 전송 => text/html
 	 	2. XML 전송 => text/xml
