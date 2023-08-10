@@ -21,6 +21,6 @@ import lombok.Setter;
 @Setter
 public class FoodVO {
 	private int fno,cno;
-	private String name,address,phone,type,price,parking,time,menu;
+	private String name,address,phone,type,price,parking,time,menu,poster;
 	private double score;
 }
