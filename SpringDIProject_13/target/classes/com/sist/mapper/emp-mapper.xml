@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.sist.mapper.emp-mapper">
+   <!-- 조인 걸어보기 -->
+   <!-- 
+   		SELECT empno,ename,dname,loc 
+   		FROM emp,dept
+   		WHERE emp.deptno=dept.deptno
+   		
+   		
+   		while(rs.next())
+   		{
+   			EmpVO vo=new EmpVO();
+   			vo.setEmpno(rs.getInt(1));
+   			vo.setEname(rs.getString(2));
+   			vo.getDvo().setDname(rs.getString(3));
+   			vo.getDvo().setLoc(rs.getString(4));
+   		}
+   		
+   		type=> 클래스 이름
+   		id=> 설정하는 이름
+   		
+   		조인문을 걸 때 resultMap을 이용해야한다+result로 컬럼명과 property의 위치(경로)를 매칭해준다
+   		
+   		MyBatis : ORM(데이터베이스 연결)
+   		 SQL : CURD / JOIN / 동적쿼리 / 프로시저 / 트랜잭션
+   		             =============          =========
+   		 #{} , ${}
+   		====   ===
+   		''(O)  ''X 컬럼명이나 테이블명 넣을때 주로 쓴다
+    -->
+    <resultMap type="com.sist.vo.EmpVO" id="empMap">
+      <result column="dname" property="dvo.dname"/>
+      <result column="loc" property="dvo.loc"/>
+    </resultMap>
+	<!-- 중복된 SQL 문장을 제거(재사용) -->
+    <sql id="select-emp">
+      SELECT empno,ename,job,TO_CHAR(hiredate,'YYYY-MM-DD') as dbday,
+             sal,dname,loc
+      FROM emp,dept
+      WHERE emp.deptno=dept.deptno
+    </sql>
+
+    <!-- 마이바틱스 조인 걸때는 resultType이 아닌 resultMap으로 (id명 적기) -->
+    <select id="empDeptListData" resultMap="empMap">
+      <include refid="select-emp"/>
+      ORDER BY sal DESC
+    </select>
+    
+    <select id="empDeptDetailData" resultMap="empMap" parameterType="int">
+      SELECT empno,ename,job,TO_CHAR(hiredate,'YYYY-MM-DD') as dbday,
+             sal,dname,loc
+      FROM emp,dept
+      WHERE emp.deptno=dept.deptno
+      AND empno=#{empno}    
+    </select>
+ </mapper>
